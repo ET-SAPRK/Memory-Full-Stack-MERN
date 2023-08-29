@@ -9,6 +9,8 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+const PORT = 5000;
+
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -16,6 +18,9 @@ mongoose
   })
   .then(() => {
     console.log("Connected to MongoDB");
+    app.listen(PORT, () =>
+      console.log(`Server Running on Port: http://localhost:${PORT}`)
+    );
   })
   .catch((err) => {
     console.log("Error Connecting to MongoDB");
